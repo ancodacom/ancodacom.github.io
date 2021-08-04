@@ -1,0 +1,172 @@
+
+.pc-wrapper{
+    overflow: hidden;
+}
+
+.video-bg{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    overflow:hidden;
+}
+.video-bg .my-video{
+    min-width: 100%;
+    min-height: 100%;
+}
+.content{
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.content .middle{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.content .middle-wrapper{
+    top: 50%;
+    left: 55%;
+    transform: translate(-60%,-60%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.content .middle .middle-wrapper .iphone-wrapper{
+    margin-right: 35px;
+    max-height: 540px;
+}
+
+.iphone{
+    width: 300px;
+    height: 600px;
+    position: relative;
+}
+.iphone {
+    max-height: 540px;
+    zoom: .6;
+}
+.iphone .iphone-mp4{
+    position: absolute;
+    width: 260px;
+    height: 564px;
+    margin: 18px 20px;
+}
+.iphone .iphone-mp4 .iphone-my-video{
+    width: 260px;
+    height: 564px;
+}
+.iphone .iphone-case{
+    position: absolute;
+    width: 300px;
+    height: 600px;
+    background-image: url('http://cdn.ancoda.cn/index_phone_back.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 500px;
+}
+
+.logo-big{
+    white-space: nowrap;
+    color: #fff;
+    font-size: 40px;
+    font-weight: 500;
+    margin: 0 10px 0;
+}
+
+.lifestyle{
+    white-space: nowrap;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 10px 0;
+}
+
+.code-list img{
+    width: 110px;
+    height: 110px;
+    border-radius:10px;
+}
+.code-list li{
+    text-align: center;
+    padding: 5px 5px 5px 10px;
+}
+.code-list li p{
+    color: #fbfbfb;
+}
+.code{
+    width: 134px;
+    height: 134px;
+    border-radius:20px;
+}
+
+ul {
+    padding: 0;
+}
+ul li {
+    position: relative;
+    padding: 30px 25px 10px 25px;
+    cursor: pointer;
+}
+ul li::after {
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: white;
+    transform: scaleX(0);
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+ul li:hover::after, ul li.active::after {
+    transform: scaleX(1);
+}
+ul li a {
+    position: relative;
+    display: flex;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Lato, sans-serif;
+    text-decoration: none;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+
+
+
+/*底部ICP内容*/
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 30px;
+}
+.footer-info{
+    color: #999;
+    width: 590px;
+}
+
