@@ -314,7 +314,8 @@ ul a li {
 .drop-up-wrapper {
     position: absolute;
     display: none;
-    right: 20px;
+    /*top: 15px;*/
+    right: 38px;
     width: 100px;
     transform: translateX(30%);
 }
