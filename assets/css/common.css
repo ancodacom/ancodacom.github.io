@@ -314,14 +314,13 @@ ul a li {
 .drop-up-wrapper {
     position: absolute;
     display: none;
-    top: 12px;
     right: 20px;
     width: 100px;
     transform: translateX(30%);
 }
 
 .drop-up-content {
-    margin-top: 46px;
+    margin-top: 0px;
     background-color: #ccc9c9;
     z-index: 1001;
     text-align: center;
