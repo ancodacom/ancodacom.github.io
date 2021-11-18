@@ -44,6 +44,7 @@
     margin-bottom: 50px;
 }
 
+/*介绍*/
 .introduction{
     background-color: #fff;
     padding-top: 110px;
@@ -78,30 +79,105 @@
     margin: 24px 0 0;
 }
 
+/*邮箱*/
+.ancoda-mail-box {
+    padding: 100px 0;
+    background-color: #fbfbfb;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: #333;
+}
+.ancoda-mail-box .title {
+    display: inline-block;
+    font-size: 36px;
+    line-height: 39px;
+    margin-bottom: 50px;
+    font-weight: 700;
+    color: #000;
+}
+.ancoda-mail-box .paragraphs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+}
+.ancoda-mail-box .paragraphs-container:before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 14px;
+    top: -10px;
+    left: -19px;
+    background-image: url('/image/about_quotes.png');
+    background-size: contain;
+}
+.ancoda-mail-box .paragraphs-container .paragraph {
+    width: 1021px;
+    margin-bottom: 30px;
+}
+.ancoda-mail-box .paragraphs-container .paragraph .content {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+}
+.ancoda-mail-box .paragraphs-container .paragraph .list {
+    margin: 15px 0 0;
+    padding: 0;
+    list-style: none;
+    color: #555;
+}
+.ancoda-mail-box .paragraphs-container .paragraph ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.ancoda-mail-box .paragraphs-container .paragraph .list .list-item {
+    width: 1002px;
+    font-size: 16px;
+    line-height: 19px;
+    margin: 0 0 15px 19px;
+    position: relative;
+}
+.ancoda-mail-box .paragraphs-container .paragraph .list .list-item:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #ff2442;
+    left: -7.5px;
+    top: 7.5px;
+}
+
+/*关注*/
 .description span{
     color: red;
 }
-
-
 .contact {
     padding-top: 100px;
     padding-bottom: 100px;
     text-align: center;
     background-color: #fff;
 }
-
 .contact .title {
     display: inline-block;
     margin-bottom: 50px;
 }
-
 .qrcode-group {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-
 .qrcode-group .qrcode {
     width: 180px;
     height: 180px;
@@ -112,7 +188,6 @@
     align-items: center;
     background-color: #fff;
 }
-
 .qrcode-group .qrcode .image {
     margin-top: 31px;
     width: 90px;
