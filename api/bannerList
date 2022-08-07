@@ -1,0 +1,30 @@
+{
+"code": 200
+"data":{
+  {
+			  	"imgUrl": "/static/img/index/nvatab/wenda.png",
+			  	"link": "www.ancoda.cn",
+				"text": "问答"
+			  }, 
+			  {
+			  "	imgUrl: "/static/img/index/nvatab/quanzi.png",
+			  	"link": "www.ancoda.cn",
+				"text": "圈子"
+			  }, 
+			  {
+			  "	imgUrl: "/static/img/index/nvatab/huodon.png",
+			  	"link": "www.ancoda.cn",
+				"text": "活动"
+			  }, 
+			  {
+			  "	imgUrl: "/static/img/index/nvatab/dinpiao.png",
+			  	"link": "www.ancoda.cn",
+				"text": "订票"
+			  },
+			  {
+			  "	imgUrl: "/static/img/index/nvatab/lingjuan.png",
+			  	"link": "www.ancoda.cn",
+				"text": "领劵"
+			  }
+}
+}
