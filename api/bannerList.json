@@ -1,30 +1,43 @@
 {
-"code": 200
-"data":{
-  {
-			  	"imgUrl": "/static/img/index/nvatab/wenda.png",
-			  	"link": "www.ancoda.cn",
-				"text": "问答"
-			  }, 
-			  {
-			  "	imgUrl: "/static/img/index/nvatab/quanzi.png",
-			  	"link": "www.ancoda.cn",
-				"text": "圈子"
-			  }, 
-			  {
-			  "	imgUrl: "/static/img/index/nvatab/huodon.png",
-			  	"link": "www.ancoda.cn",
-				"text": "活动"
-			  }, 
-			  {
-			  "	imgUrl: "/static/img/index/nvatab/dinpiao.png",
-			  	"link": "www.ancoda.cn",
-				"text": "订票"
-			  },
-			  {
-			  "	imgUrl: "/static/img/index/nvatab/lingjuan.png",
-			  	"link": "www.ancoda.cn",
-				"text": "领劵"
-			  }
-}
+	"code":"200",
+	"msg":"操作成功",
+	"data":[
+		{
+			"pic": "http://note.mafengwo.net/img/82/c3/b6b2b44800994fc87e90ae47395e89de.jpeg",
+			"avatar": "https://p6-passport.byteacctimg.com/img/user-avatar/b9ca0d0682b3c0c50f19966af6102525~300x300.image",
+			"prodName": "给我一台手机，我帮你拍美照——深圳",
+                        "prodId": 10018,
+                        "nikeName": "曲小姐",
+                        "buyNumber": 155
+		},{
+			"pic": "http://note.mafengwo.net/img/82/c3/b6b2b44800994fc87e90ae47395e89de.jpeg",
+			"avatar": "https://p6-passport.byteacctimg.com/img/user-avatar/b9ca0d0682b3c0c50f19966af6102525~300x300.image",
+			"prodName": "给我一台手机，我帮你拍美照——深圳",
+                        "prodId": 10018,
+                        "nikeName": "曲小姐",
+                        "buyNumber": 155
+		},{
+			"pic": "http://note.mafengwo.net/img/82/c3/b6b2b44800994fc87e90ae47395e89de.jpeg",
+			"avatar": "https://p6-passport.byteacctimg.com/img/user-avatar/b9ca0d0682b3c0c50f19966af6102525~300x300.image",
+			"prodName": "给我一台手机，我帮你拍美照——深圳",
+                        "prodId": 10018,
+                        "nikeName": "曲小姐",
+                        "buyNumber": 155
+		},{
+			"pic": "http://note.mafengwo.net/img/82/c3/b6b2b44800994fc87e90ae47395e89de.jpeg",
+			"avatar": "https://p6-passport.byteacctimg.com/img/user-avatar/b9ca0d0682b3c0c50f19966af6102525~300x300.image",
+			"prodName": "给我一台手机，我帮你拍美照——深圳",
+                        "prodId": 10018,
+                        "nikeName": "曲小姐",
+                        "buyNumber": 155
+		},{
+			"pic": "http://note.mafengwo.net/img/82/c3/b6b2b44800994fc87e90ae47395e89de.jpeg",
+			"avatar": "https://p6-passport.byteacctimg.com/img/user-avatar/b9ca0d0682b3c0c50f19966af6102525~300x300.image",
+			"prodName": "给我一台手机，我帮你拍美照——深圳",
+                        "prodId": 10018,
+                        "nikeName": "曲小姐",
+                        "buyNumber": 155
+		}
+
+	]
 }
