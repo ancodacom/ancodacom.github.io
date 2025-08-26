@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全跳转页面 - Ancoda安可达</title>
+    <link rel="icon" href="/favicon.ico">
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e9ca8e65b7bbe9f792ccb5e1e14400ab";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-image: url("https://www.ancoda.com.cn/image/logo.png");
+            background-repeat: repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* 添加一个半透明覆盖层以提高可读性 */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .url-display {
+            background: #f5f7ff;
+            border: 1px solid #e0e5ff;
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin: 25px 0;
+            word-break: break-all;
+            font-size: 16px;
+            color: #445;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .url-display svg {
+            margin-right: 10px;
+            color: #6e8efb;
+        }
+
+        .jump-button {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .jump-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(110, 142, 251, 0.6);
+        }
+
+        .jump-button:active {
+            transform: translateY(0);
+        }
+
+        .jump-button svg {
+            margin-left: 8px;
+        }
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            color: #28a745;
+            font-size: 14px;
+        }
+
+        .security-note svg {
+            margin-right: 8px;
+        }
+
+        .countdown {
+            margin-top: 15px;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+    </div>
+
+    <h1>即将进入安可达官网</h1>
+
+    <p>请注意保护隐私和财产安全，如遇可疑地址请停止访问。</p>
+
+    <div class="url-display">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        <span id="target-url">https://www.ancoda.com.cn</span>
+    </div>
+
+    <button class="jump-button" id="jump-btn">
+        安全跳转
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+    </button>
+
+    <div class="security-note">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>已通过安全验证，可放心访问</span>
+    </div>
+
+    <div class="countdown" id="countdown">
+        如果您未跳转，请点击上方按钮
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const jumpButton = document.getElementById('jump-btn');
+        const targetUrl = document.getElementById('target-url');
+        const countdownEl = document.getElementById('countdown');
+
+        // 模拟从URL参数获取目标网址
+        function getTargetUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('url') || 'https://www.ancoda.com.cn';
+        }
+
+        // 设置目标网址
+        const url = getTargetUrl();
+        targetUrl.textContent = url;
+
+        // 跳转函数
+        function jumpToTarget() {
+            window.location.href = url;
+        }
+
+        // 添加按钮点击事件
+        jumpButton.addEventListener('click', jumpToTarget);
+
+        // 可选：添加倒计时自动跳转
+        let seconds = 120;
+        const countdownInterval = setInterval(() => {
+            seconds--;
+            countdownEl.textContent = `如果您未跳转，页面将在 ${seconds} 秒后自动跳转`;
+
+            if (seconds <= 0) {
+                clearInterval(countdownInterval);
+                jumpToTarget();
+            }
+        }, 1000);
+    });
+</script>
+</body>
+</html>
