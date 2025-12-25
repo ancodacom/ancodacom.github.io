@@ -1,1048 +1,1054 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AncodaGame - Ancoda安可达</title>
-  <script>
-      var _hmt = _hmt || [];
-      (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?e9ca8e65b7bbe9f792ccb5e1e14400ab";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-      })();
-  </script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0c2461 0%, #1e3799 50%, #4a69bd 100%);
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-      width: 100%;
-      max-width: 800px;
-    }
-
-    .logo {
-      font-size: 3.5rem;
-      font-weight: 800;
-      background: linear-gradient(to right, #ffffff, #6a89cc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-bottom: 20px;
-      color: #a5b4fc;
-    }
-
-    .game-info {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 20px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      max-width: 800px;
-      width: 100%;
-    }
-
-    .info-text {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .domain-display {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #ffd700;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .correct-domain {
-      color: #4cd964;
-      font-weight: bold;
-    }
-
-    .game-container {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin-bottom: 30px;
-    }
-
-    #gameCanvas {
-      background: #0a192f;
-      border-radius: 10px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-      display: block;
-      margin: 0 auto;
-      border: 3px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 25px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      background: linear-gradient(to right, #4a69bd, #1e3799);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      min-width: 160px;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      background: linear-gradient(to right, #6a89cc, #4a69bd);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn-restart {
-      background: linear-gradient(to right, #38ada9, #079992);
-    }
-
-    .btn-restart:hover {
-      background: linear-gradient(to right, #079992, #38ada9);
-    }
-
-    .instructions {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-      max-width: 800px;
-      width: 100%;
-      margin-top: 20px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .instructions h3 {
-      color: #6a89cc;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .instructions ul {
-      padding-left: 20px;
-      margin-bottom: 15px;
-    }
-
-    .instructions li {
-      margin-bottom: 10px;
-      line-height: 1.5;
-    }
-
-    .key {
-      display: inline-block;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 3px 10px;
-      border-radius: 5px;
-      font-family: monospace;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      margin: 0 3px;
-    }
-
-    .score-display {
-      display: flex;
-      gap: 30px;
-      font-size: 1.3rem;
-      font-weight: bold;
-    }
-
-    .score-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .score-value {
-      font-size: 2rem;
-      color: #ffd700;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .score-label {
-      font-size: 0.9rem;
-      opacity: 0.8;
-      margin-top: 5px;
-    }
-
-    .game-message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.85);
-      padding: 30px 50px;
-      border-radius: 15px;
-      text-align: center;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      display: none;
-      max-width: 500px;
-      width: 90%;
-    }
-
-    .game-message h2 {
-      color: #ffd700;
-      margin-bottom: 15px;
-      font-size: 2.2rem;
-    }
-
-    .game-message p {
-      margin-bottom: 20px;
-      line-height: 1.5;
-      font-size: 1.1rem;
-    }
-
-    .game-message .btn {
-      margin: 20px auto 0 auto;
-      display: block;
-      width: 200px;
-    }
-
-    .highlight {
-      color: #ffd700;
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      .logo {
-        font-size: 2.8rem;
-      }
-
-      #gameCanvas {
-        width: 100%;
-        height: auto;
-      }
-
-      .score-display {
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-      }
-
-      .info-text {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .btn {
-        padding: 10px 20px;
-        font-size: 1rem;
-      }
-
-      .game-message {
-        padding: 20px 30px;
-      }
-
-      .game-message h2 {
-        font-size: 1.8rem;
-      }
-
-      .game-message .btn {
-        width: 180px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .logo {
-        font-size: 2.2rem;
-      }
-
-      .game-message {
-        padding: 15px 20px;
-      }
-
-      .game-message h2 {
-        font-size: 1.5rem;
-      }
-
-      .game-message .btn {
-        width: 160px;
-        padding: 10px 15px;
-      }
-    }
-
-    .footer {
-      margin-top: 30px;
-      text-align: center;
-      font-size: 0.9rem;
-      opacity: 0.7;
-      color: #a5b4fc;
-      max-width: 800px;
-    }
-
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      animation: float 15s infinite linear;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AncodaGame - Ancoda安可达</title>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?e9ca8e65b7bbe9f792ccb5e1e14400ab";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c2461 0%, #1e3799 50%, #4a69bd 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff, #6a89cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            color: #a5b4fc;
+        }
+        
+        .game-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .info-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .domain-display {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .correct-domain {
+            color: #4cd964;
+            font-weight: bold;
+        }
+        
+        .game-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+        
+        #gameCanvas {
+            background: #0a192f;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            display: block;
+            margin: 0 auto;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #4a69bd, #1e3799);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-width: 160px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #6a89cc, #4a69bd);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-restart {
+            background: linear-gradient(to right, #38ada9, #079992);
+        }
+        
+        .btn-restart:hover {
+            background: linear-gradient(to right, #079992, #38ada9);
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .instructions h3 {
+            color: #6a89cc;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .key {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 0 3px;
+        }
+        
+        .score-display {
+            display: flex;
+            gap: 30px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .score-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .score-value {
+            font-size: 2rem;
+            color: #ffd700;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .game-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px 50px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .game-message h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+        }
+        
+        .game-message p {
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-size: 1.1rem;
+        }
+        
+        .game-message .btn {
+            margin: 20px auto 0 auto;
+            display: block;
+            width: 200px;
+        }
+        
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            #gameCanvas {
+                width: 100%;
+                height: auto;
+            }
+            
+            .score-display {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .info-text {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .game-message {
+                padding: 20px 30px;
+            }
+            
+            .game-message h2 {
+                font-size: 1.8rem;
+            }
+            
+            .game-message .btn {
+                width: 180px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .game-message {
+                padding: 15px 20px;
+            }
+            
+            .game-message h2 {
+                font-size: 1.5rem;
+            }
+            
+            .game-message .btn {
+                width: 160px;
+                padding: 10px 15px;
+            }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            color: #a5b4fc;
+            max-width: 800px;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0;
+            }
+            10% { 
+                opacity: 0.7;
+            }
+            90% { 
+                opacity: 0.7;
+            }
+            100% { 
+                transform: translateY(-100px) rotate(360deg); 
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-<!-- 背景粒子 -->
-<div class="particles" id="particles"></div>
-
-<div class="header">
-  <div class="logo">ANCODA域名守卫者</div>
-  <div class="subtitle">跳过错误域名，收集正确域名，帮助ANCODA守卫网络边界！</div>
-</div>
-
-<div class="game-info">
-  <div class="info-text">
-    <div class="domain-display">
-      正确域名: <span class="correct-domain">www.ancoda.com.cn</span>
+    <!-- 背景粒子 -->
+    <div class="particles" id="particles"></div>
+    
+    <div class="header">
+        <div class="logo">ANCODA域名守卫者</div>
+        <div class="subtitle">跳过错误域名，收集正确域名，帮助ANCODA守卫网络边界！</div>
     </div>
-    <div class="score-display">
-      <div class="score-item">
-        <div class="score-value" id="score">0</div>
-        <div class="score-label">得分</div>
-      </div>
-      <div class="score-item">
-        <div class="score-value" id="highScore">0</div>
-        <div class="score-label">最高分</div>
-      </div>
-      <div class="score-item">
-        <div class="score-value" id="lives">3</div>
-        <div class="score-label">生命</div>
-      </div>
+    
+    <div class="game-info">
+        <div class="info-text">
+            <div class="domain-display">
+                正确域名: <span class="correct-domain">www.ancoda.com.cn</span>
+            </div>
+            <div class="score-display">
+                <div class="score-item">
+                    <div class="score-value" id="score">0</div>
+                    <div class="score-label">得分</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="highScore">0</div>
+                    <div class="score-label">最高分</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value" id="lives">3</div>
+                    <div class="score-label">生命</div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    
+    <div class="game-container">
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        
+        <div class="game-message" id="startMessage">
+            <h2>ANCODA域名守卫者</h2>
+            <p>ANCODA已启用 <span class="highlight">www.ancoda.com.cn</span> 作为官方域名</p>
+            <p>请跳过错误域名，收集正确域名！</p>
+            <p>按<span class="key">空格</span>键或<span class="key">↑</span>开始游戏并跳跃</p>
+            <button class="btn btn-start" id="startButton">
+                <i class="fas fa-play"></i> 开始游戏
+            </button>
+        </div>
+        
+        <div class="game-message" id="gameOverMessage">
+            <h2>游戏结束</h2>
+            <p>你的得分: <span id="finalScore" class="highlight">0</span></p>
+            <p>正确域名: <span class="correct-domain">www.ancoda.com.cn</span></p>
+            <p>请访问我们的正式域名获取最新信息</p>
+            <button class="btn btn-restart" id="restartButton">
+                <i class="fas fa-redo"></i> 重新开始
+            </button>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button class="btn btn-start" id="startButton2">
+            <i class="fas fa-play"></i> 开始游戏
+        </button>
+        <button class="btn btn-pause" id="pauseButton">
+            <i class="fas fa-pause"></i> 暂停游戏
+        </button>
+        <button class="btn btn-restart" id="restartButton2">
+            <i class="fas fa-redo"></i> 重新开始
+        </button>
+    </div>
+    
+    <div class="instructions">
+        <h3><i class="fas fa-gamepad"></i> 游戏说明</h3>
+        <ul>
+            <li>按 <span class="key">空格</span> 键或 <span class="key">↑</span> 箭头键跳跃，按 <span class="key">↓</span> 箭头键下蹲</li>
+            <li>躲避错误域名障碍物：<span style="color:#ff6b6b">ancoda.com</span> 和 <span style="color:#ff6b6b">ancoda.cn</span></li>
+            <li>收集正确域名：<span style="color:#4cd964">www.ancoda.com.cn</span> 可增加得分和生命</li>
+            <li>每躲过一个障碍物得10分，收集正确域名得50分</li>
+            <li>每收集5个正确域名增加1个生命值</li>
+            <li>游戏速度会随时间逐渐加快</li>
+        </ul>
+        <p><strong>提示：</strong>此页面仅作为域名提示和游戏，不会自动跳转。请手动访问正确域名。</p>
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 ANCODA Technology. 官方域名: www.ancoda.com.cn</p>
+    </div>
 
-<div class="game-container">
-  <canvas id="gameCanvas" width="800" height="400"></canvas>
-
-  <div class="game-message" id="startMessage">
-    <h2>ANCODA域名守卫者</h2>
-    <p>ANCODA已启用 <span class="highlight">www.ancoda.com.cn</span> 官方域名</p>
-    <p>请跳过错误域名，收集正确域名！</p>
-    <p>按<span class="key">空格</span>键或<span class="key">↑</span>开始游戏并跳跃</p>
-    <button class="btn btn-start" id="startButton">
-      <i class="fas fa-play"></i> 开始游戏
-    </button>
-  </div>
-
-  <div class="game-message" id="gameOverMessage">
-    <h2>游戏结束</h2>
-    <p>你的得分: <span id="finalScore" class="highlight">0</span></p>
-    <p>正确域名: <span class="correct-domain">www.ancoda.com.cn</span></p>
-    <p>请访问我们的正式域名获取最新信息</p>
-    <button class="btn btn-restart" id="restartButton">
-      <i class="fas fa-redo"></i> 重新开始
-    </button>
-  </div>
-</div>
-
-<div class="controls">
-  <button class="btn btn-start" id="startButton2">
-    <i class="fas fa-play"></i> 开始游戏
-  </button>
-  <button class="btn btn-pause" id="pauseButton">
-    <i class="fas fa-pause"></i> 暂停游戏
-  </button>
-  <button class="btn btn-restart" id="restartButton2">
-    <i class="fas fa-redo"></i> 重新开始
-  </button>
-</div>
-
-<div class="instructions">
-  <h3><i class="fas fa-gamepad"></i> 游戏说明</h3>
-  <ul>
-    <li>按 <span class="key">空格</span> 键或 <span class="key">↑</span> 箭头键跳跃，按 <span class="key">↓</span> 箭头键下蹲</li>
-    <li>躲避错误域名障碍物：<span style="color:#ff6b6b">ancoda.com</span> 和 <span style="color:#ff6b6b">ancoda.cn</span></li>
-    <li>收集正确域名：<span style="color:#4cd964">www.ancoda.com.cn</span> 可增加得分和生命</li>
-    <li>每躲过一个障碍物得10分，收集正确域名得50分</li>
-    <li>每收集5个正确域名增加1个生命值</li>
-    <li>游戏速度会随时间逐渐加快</li>
-  </ul>
-  <p><strong>提示：</strong>此页面仅作为域名提示和游戏，不会自动跳转。请手动访问正确域名。</p>
-</div>
-
-<div class="footer">
-  <p>© 2020 ANCODA Technology. 官方域名: www.ancoda.com.cn</p>
-</div>
-
-<script>
-  // 游戏变量
-  const canvas = document.getElementById('gameCanvas');
-  const ctx = canvas.getContext('2d');
-  const startMessage = document.getElementById('startMessage');
-  const gameOverMessage = document.getElementById('gameOverMessage');
-  const startButton = document.getElementById('startButton');
-  const startButton2 = document.getElementById('startButton2');
-  const pauseButton = document.getElementById('pauseButton');
-  const restartButton = document.getElementById('restartButton');
-  const restartButton2 = document.getElementById('restartButton2');
-  const scoreElement = document.getElementById('score');
-  const highScoreElement = document.getElementById('highScore');
-  const livesElement = document.getElementById('lives');
-  const finalScoreElement = document.getElementById('finalScore');
-
-  // 游戏状态
-  let game = {
-    running: false,
-    paused: false,
-    score: 0,
-    highScore: localStorage.getItem('ancodaHighScore') || 0,
-    lives: 3,
-    speed: 5,
-    collectedDomains: 0,
-    gameOver: false
-  };
-
-  // 初始化高分显示
-  highScoreElement.textContent = game.highScore;
-
-  // 游戏元素
-  let player = {
-    x: 80,
-    y: canvas.height - 60,
-    width: 40,
-    height: 60,
-    jumping: false,
-    ducking: false,
-    jumpVelocity: 0,
-    gravity: 0.6,
-    jumpPower: -15,
-    color: '#4a69bd'
-  };
-
-  // 障碍物和奖励
-  let obstacles = [];
-  let rewards = [];
-
-  // 地面
-  let ground = {
-    y: canvas.height - 20,
-    height: 20,
-    color: '#1e3799'
-  };
-
-  // 背景元素
-  let backgroundElements = [];
-
-  // 按键状态
-  let keys = {};
-
-  // 创建背景元素
-  function createBackgroundElements() {
-    backgroundElements = [];
-    for (let i = 0; i < 20; i++) {
-      backgroundElements.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height * 0.7,
-        size: Math.random() * 4 + 1,
-        speed: Math.random() * 2 + 1,
-        color: `rgba(106, 137, 204, ${Math.random() * 0.5 + 0.2})`
-      });
-    }
-  }
-
-  // 创建背景粒子
-  function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    particlesContainer.innerHTML = '';
-
-    for (let i = 0; i < 30; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-
-      // 随机大小
-      const size = Math.random() * 10 + 2;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-
-      // 随机位置
-      particle.style.left = `${Math.random() * 100}vw`;
-
-      // 随机颜色
-      const colors = ['rgba(106, 137, 204, 0.5)', 'rgba(74, 105, 189, 0.4)', 'rgba(30, 55, 153, 0.3)'];
-      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-      // 随机动画延迟和持续时间
-      const delay = Math.random() * 10;
-      const duration = Math.random() * 10 + 10;
-      particle.style.animationDelay = `${delay}s`;
-      particle.style.animationDuration = `${duration}s`;
-
-      particlesContainer.appendChild(particle);
-    }
-  }
-
-  // 绘制玩家
-  function drawPlayer() {
-    ctx.fillStyle = player.color;
-
-    // 绘制身体
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-
-    // 绘制眼睛
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(player.x + player.width - 15, player.y + 15, 8, 8);
-
-    // 绘制装饰
-    ctx.fillStyle = '#ffd700';
-    ctx.fillRect(player.x, player.y, 8, player.height);
-
-    // 如果蹲下，绘制蹲下状态
-    if (player.ducking) {
-      ctx.fillStyle = '#1e3799';
-      ctx.fillRect(player.x, player.y + player.height - 10, player.width, 10);
-    }
-  }
-
-  // 绘制障碍物（错误域名）
-  function drawObstacle(obstacle) {
-    // 绘制障碍物主体
-    ctx.fillStyle = '#ff6b6b';
-    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-
-    // 绘制域名文字
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 14px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText(obstacle.text, obstacle.x + obstacle.width/2, obstacle.y + obstacle.height/2 + 5);
-
-    // 绘制装饰边框
-    ctx.strokeStyle = '#ff4757';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-  }
-
-  // 绘制奖励（正确域名）
-  function drawReward(reward) {
-    // 绘制奖励主体
-    ctx.fillStyle = '#4cd964';
-    ctx.beginPath();
-    ctx.arc(reward.x + reward.size/2, reward.y + reward.size/2, reward.size/2, 0, Math.PI * 2);
-    ctx.fill();
-
-    // 绘制发光效果
-    ctx.strokeStyle = 'rgba(76, 217, 100, 0.6)';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.arc(reward.x + reward.size/2, reward.y + reward.size/2, reward.size/2 + 2, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // 绘制域名文字
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 10px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('✓', reward.x + reward.size/2, reward.y + reward.size/2 + 3);
-  }
-
-  // 绘制地面
-  function drawGround() {
-    // 地面
-    ctx.fillStyle = ground.color;
-    ctx.fillRect(0, ground.y, canvas.width, ground.height);
-
-    // 地面装饰线
-    ctx.strokeStyle = '#4a69bd';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(0, ground.y);
-    ctx.lineTo(canvas.width, ground.y);
-    ctx.stroke();
-
-    // 地面图案
-    ctx.fillStyle = '#6a89cc';
-    for (let i = 0; i < canvas.width; i += 40) {
-      ctx.fillRect(i, ground.y + 5, 20, 5);
-    }
-  }
-
-  // 绘制背景
-  function drawBackground() {
-    // 渐变背景
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, '#0a192f');
-    gradient.addColorStop(1, '#0c2461');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // 绘制背景元素（数据流效果）
-    for (let element of backgroundElements) {
-      ctx.fillStyle = element.color;
-      ctx.fillRect(element.x, element.y, element.size, element.size * 3);
-
-      // 更新位置
-      element.x -= element.speed;
-      if (element.x < -10) {
-        element.x = canvas.width + 10;
-        element.y = Math.random() * canvas.height * 0.7;
-      }
-    }
-
-    // 绘制游戏标题
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-    ctx.font = 'bold 24px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('ANCODA域名守卫者', canvas.width / 2, 40);
-
-    // 绘制正确域名提示
-    ctx.fillStyle = 'rgba(76, 217, 100, 0.2)';
-    ctx.font = '16px Arial';
-    ctx.fillText('正确域名: www.ancoda.com.cn', canvas.width / 2, 70);
-  }
-
-  // 更新玩家位置
-  function updatePlayer() {
-    // 跳跃物理
-    if (player.jumping) {
-      player.y += player.jumpVelocity;
-      player.jumpVelocity += player.gravity;
-
-      // 落地检测
-      if (player.y >= canvas.height - 60 - ground.height) {
-        player.y = canvas.height - 60 - ground.height;
-        player.jumping = false;
-        player.jumpVelocity = 0;
-      }
-    }
-
-    // 蹲下处理
-    if (player.ducking) {
-      player.height = 40;
-    } else {
-      player.height = 60;
-      // 确保站立时脚在地上
-      if (!player.jumping) {
-        player.y = canvas.height - player.height - ground.height;
-      }
-    }
-  }
-
-  // 生成障碍物
-  function generateObstacle() {
-    const obstacleTypes = [
-      { text: 'ancoda.com', width: 110, height: 40 },
-      { text: 'ancoda.cn', width: 100, height: 40 }
-    ];
-
-    const type = obstacleTypes[Math.floor(Math.random() * obstacleTypes.length)];
-
-    obstacles.push({
-      x: canvas.width,
-      y: canvas.height - type.height - ground.height,
-      width: type.width,
-      height: type.height,
-      text: type.text,
-      color: '#ff6b6b'
-    });
-  }
-
-  // 生成奖励
-  function generateReward() {
-    rewards.push({
-      x: canvas.width,
-      y: canvas.height - 100 - ground.height,
-      size: 30,
-      text: 'ancoda.com.cn'
-    });
-  }
-
-  // 更新障碍物和奖励
-  function updateObstaclesAndRewards() {
-    // 更新障碍物
-    for (let i = obstacles.length - 1; i >= 0; i--) {
-      obstacles[i].x -= game.speed;
-
-      // 移除屏幕外的障碍物
-      if (obstacles[i].x + obstacles[i].width < 0) {
-        obstacles.splice(i, 1);
-        // 障碍物离开屏幕，增加分数
-        if (game.running && !game.gameOver) {
-          game.score += 10;
-          scoreElement.textContent = game.score;
+    <script>
+        // 游戏变量
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startMessage = document.getElementById('startMessage');
+        const gameOverMessage = document.getElementById('gameOverMessage');
+        const startButton = document.getElementById('startButton');
+        const startButton2 = document.getElementById('startButton2');
+        const pauseButton = document.getElementById('pauseButton');
+        const restartButton = document.getElementById('restartButton');
+        const restartButton2 = document.getElementById('restartButton2');
+        const scoreElement = document.getElementById('score');
+        const highScoreElement = document.getElementById('highScore');
+        const livesElement = document.getElementById('lives');
+        const finalScoreElement = document.getElementById('finalScore');
+        
+        // 游戏状态
+        let game = {
+            running: false,
+            paused: false,
+            score: 0,
+            highScore: localStorage.getItem('ancodaHighScore') || 0,
+            lives: 3,
+            speed: 5,
+            collectedDomains: 0,
+            gameOver: false
+        };
+        
+        // 初始化高分显示
+        highScoreElement.textContent = game.highScore;
+        
+        // 游戏元素
+        let player = {
+            x: 80,
+            y: canvas.height - 60,
+            width: 40,
+            height: 60,
+            jumping: false,
+            ducking: false,
+            jumpVelocity: 0,
+            gravity: 0.6,
+            jumpPower: -15,
+            color: '#4a69bd'
+        };
+        
+        // 障碍物和奖励
+        let obstacles = [];
+        let rewards = [];
+        
+        // 地面
+        let ground = {
+            y: canvas.height - 20,
+            height: 20,
+            color: '#1e3799'
+        };
+        
+        // 背景元素
+        let backgroundElements = [];
+        
+        // 按键状态
+        let keys = {};
+        
+        // 创建背景元素
+        function createBackgroundElements() {
+            backgroundElements = [];
+            for (let i = 0; i < 20; i++) {
+                backgroundElements.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height * 0.7,
+                    size: Math.random() * 4 + 1,
+                    speed: Math.random() * 2 + 1,
+                    color: `rgba(106, 137, 204, ${Math.random() * 0.5 + 0.2})`
+                });
+            }
         }
-      }
-    }
-
-    // 更新奖励
-    for (let i = rewards.length - 1; i >= 0; i--) {
-      rewards[i].x -= game.speed;
-
-      // 移除屏幕外的奖励
-      if (rewards[i].x + rewards[i].size < 0) {
-        rewards.splice(i, 1);
-      }
-    }
-
-    // 随机生成新障碍物
-    if (obstacles.length === 0 ||
-      obstacles[obstacles.length - 1].x < canvas.width - 300) {
-      if (Math.random() < 0.02) {
-        generateObstacle();
-      }
-    }
-
-    // 随机生成新奖励
-    if (rewards.length === 0 ||
-      rewards[rewards.length - 1].x < canvas.width - 400) {
-      if (Math.random() < 0.01) {
-        generateReward();
-      }
-    }
-  }
-
-  // 碰撞检测
-  function checkCollisions() {
-    // 玩家边界
-    const playerLeft = player.x;
-    const playerRight = player.x + player.width;
-    const playerTop = player.y;
-    const playerBottom = player.y + player.height;
-
-    // 检查障碍物碰撞
-    for (let obstacle of obstacles) {
-      const obstacleLeft = obstacle.x;
-      const obstacleRight = obstacle.x + obstacle.width;
-      const obstacleTop = obstacle.y;
-      const obstacleBottom = obstacle.y + obstacle.height;
-
-      // 矩形碰撞检测
-      if (playerRight > obstacleLeft &&
-        playerLeft < obstacleRight &&
-        playerBottom > obstacleTop &&
-        playerTop < obstacleBottom) {
-
-        // 发生碰撞，减少生命
-        game.lives--;
-        livesElement.textContent = game.lives;
-
-        // 移除障碍物
-        const index = obstacles.indexOf(obstacle);
-        obstacles.splice(index, 1);
-
-        // 生命值为0时游戏结束
-        if (game.lives <= 0) {
-          gameOver();
+        
+        // 创建背景粒子
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机大小
+                const size = Math.random() * 10 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机位置
+                particle.style.left = `${Math.random() * 100}vw`;
+                
+                // 随机颜色
+                const colors = ['rgba(106, 137, 204, 0.5)', 'rgba(74, 105, 189, 0.4)', 'rgba(30, 55, 153, 0.3)'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // 随机动画延迟和持续时间
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
         }
-
-        // 碰撞后短暂无敌时间（通过闪烁表示）
-        player.color = '#ff6b6b';
-        setTimeout(() => {
-          player.color = '#4a69bd';
-        }, 300);
-
-        break;
-      }
-    }
-
-    // 检查奖励收集
-    for (let i = rewards.length - 1; i >= 0; i--) {
-      const reward = rewards[i];
-      const rewardCenterX = reward.x + reward.size/2;
-      const rewardCenterY = reward.y + reward.size/2;
-
-      // 圆形与矩形碰撞检测（简化版）
-      const closestX = Math.max(playerLeft, Math.min(rewardCenterX, playerRight));
-      const closestY = Math.max(playerTop, Math.min(rewardCenterY, playerBottom));
-
-      const distanceX = rewardCenterX - closestX;
-      const distanceY = rewardCenterY - closestY;
-      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-      if (distance < reward.size/2) {
-        // 收集奖励
-        game.score += 50;
-        game.collectedDomains++;
-        scoreElement.textContent = game.score;
-
-        // 每收集5个正确域名增加生命
-        if (game.collectedDomains % 5 === 0) {
-          game.lives++;
-          livesElement.textContent = game.lives;
+        
+        // 绘制玩家
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            
+            // 绘制身体
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            
+            // 绘制眼睛
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(player.x + player.width - 15, player.y + 15, 8, 8);
+            
+            // 绘制装饰
+            ctx.fillStyle = '#ffd700';
+            ctx.fillRect(player.x, player.y, 8, player.height);
+            
+            // 如果蹲下，绘制蹲下状态
+            if (player.ducking) {
+                ctx.fillStyle = '#1e3799';
+                ctx.fillRect(player.x, player.y + player.height - 10, player.width, 10);
+            }
         }
-
-        // 移除奖励
-        rewards.splice(i, 1);
-
-        // 奖励收集效果
-        player.color = '#4cd964';
-        setTimeout(() => {
-          player.color = '#4a69bd';
-        }, 200);
-      }
-    }
-  }
-
-  // 更新游戏速度
-  function updateGameSpeed() {
-    // 每1000分增加速度
-    const speedLevel = Math.floor(game.score / 1000);
-    game.speed = 5 + speedLevel * 0.5;
-
-    // 速度上限
-    if (game.speed > 15) {
-      game.speed = 15;
-    }
-  }
-
-  // 游戏主循环
-  function gameLoop() {
-    // 清除画布
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // 绘制背景
-    drawBackground();
-
-    // 绘制地面
-    drawGround();
-
-    // 更新和绘制玩家
-    updatePlayer();
-    drawPlayer();
-
-    // 更新和绘制障碍物与奖励
-    updateObstaclesAndRewards();
-
-    for (let obstacle of obstacles) {
-      drawObstacle(obstacle);
-    }
-
-    for (let reward of rewards) {
-      drawReward(reward);
-    }
-
-    // 碰撞检测
-    checkCollisions();
-
-    // 更新游戏速度
-    updateGameSpeed();
-
-    // 继续游戏循环
-    if (game.running && !game.paused && !game.gameOver) {
-      requestAnimationFrame(gameLoop);
-    }
-  }
-
-  // 开始游戏
-  function startGame() {
-    game.running = true;
-    game.paused = false;
-    game.gameOver = false;
-    game.score = 0;
-    game.lives = 3;
-    game.speed = 5;
-    game.collectedDomains = 0;
-
-    // 重置玩家
-    player.y = canvas.height - 60 - ground.height;
-    player.jumping = false;
-    player.ducking = false;
-    player.jumpVelocity = 0;
-    player.color = '#4a69bd';
-
-    // 清空障碍物和奖励
-    obstacles = [];
-    rewards = [];
-
-    // 更新UI
-    scoreElement.textContent = game.score;
-    livesElement.textContent = game.lives;
-    startMessage.style.display = 'none';
-    gameOverMessage.style.display = 'none';
-
-    // 开始游戏循环
-    gameLoop();
-  }
-
-  // 暂停游戏
-  function pauseGame() {
-    game.paused = !game.paused;
-
-    if (game.paused) {
-      pauseButton.innerHTML = '<i class="fas fa-play"></i> 继续游戏';
-    } else {
-      pauseButton.innerHTML = '<i class="fas fa-pause"></i> 暂停游戏';
-      if (game.running && !game.gameOver) {
-        gameLoop();
-      }
-    }
-  }
-
-  // 游戏结束
-  function gameOver() {
-    game.running = false;
-    game.gameOver = true;
-
-    // 更新最高分
-    if (game.score > game.highScore) {
-      game.highScore = game.score;
-      localStorage.setItem('ancodaHighScore', game.highScore);
-      highScoreElement.textContent = game.highScore;
-    }
-
-    // 显示游戏结束消息
-    finalScoreElement.textContent = game.score;
-    gameOverMessage.style.display = 'block';
-  }
-
-  // 重新开始游戏
-  function restartGame() {
-    gameOverMessage.style.display = 'none';
-    startGame();
-  }
-
-  // 键盘控制
-  document.addEventListener('keydown', function(event) {
-    keys[event.code] = true;
-
-    // 空格键或上箭头跳跃
-    if ((event.code === 'Space' || event.code === 'ArrowUp') && game.running && !game.gameOver) {
-      if (!player.jumping) {
-        player.jumping = true;
-        player.jumpVelocity = player.jumpPower;
-      }
-      event.preventDefault();
-    }
-
-    // 下箭头蹲下
-    if (event.code === 'ArrowDown' && game.running && !game.gameOver) {
-      player.ducking = true;
-      event.preventDefault();
-    }
-
-    // 回车键开始游戏
-    if (event.code === 'Enter' && !game.running) {
-      startGame();
-    }
-
-    // P键暂停游戏
-    if (event.code === 'KeyP' && game.running && !game.gameOver) {
-      pauseGame();
-    }
-  });
-
-  document.addEventListener('keyup', function(event) {
-    keys[event.code] = false;
-
-    // 释放下箭头停止蹲下
-    if (event.code === 'ArrowDown') {
-      player.ducking = false;
-    }
-  });
-
-  // 按钮事件监听
-  startButton.addEventListener('click', startGame);
-  startButton2.addEventListener('click', startGame);
-  pauseButton.addEventListener('click', pauseGame);
-  restartButton.addEventListener('click', restartGame);
-  restartButton2.addEventListener('click', restartGame);
-
-  // 显示开始消息
-  startMessage.style.display = 'block';
-
-  // 初始化背景元素和粒子
-  createBackgroundElements();
-  createParticles();
-
-  // 绘制初始画面
-  drawBackground();
-  drawGround();
-  drawPlayer();
-
-  // 初始绘制一个示例障碍物和奖励
-  ctx.fillStyle = '#ff6b6b';
-  ctx.fillRect(600, canvas.height - 60 - ground.height, 110, 40);
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 14px Arial';
-  ctx.textAlign = 'center';
-  ctx.fillText('ancoda.com', 655, canvas.height - 60 - ground.height + 25);
-
-  ctx.fillStyle = '#4cd964';
-  ctx.beginPath();
-  ctx.arc(400, canvas.height - 100 - ground.height, 15, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 10px Arial';
-  ctx.fillText('✓', 400, canvas.height - 100 - ground.height + 3);
-</script>
-
-<!-- Font Awesome 图标 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+        
+        // 绘制障碍物（错误域名）
+        function drawObstacle(obstacle) {
+            // 绘制障碍物主体
+            ctx.fillStyle = '#ff6b6b';
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            
+            // 绘制域名文字
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(obstacle.text, obstacle.x + obstacle.width/2, obstacle.y + obstacle.height/2 + 5);
+            
+            // 绘制装饰边框
+            ctx.strokeStyle = '#ff4757';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        }
+        
+        // 绘制奖励（正确域名）
+        function drawReward(reward) {
+            // 绘制奖励主体
+            ctx.fillStyle = '#4cd964';
+            ctx.beginPath();
+            ctx.arc(reward.x + reward.size/2, reward.y + reward.size/2, reward.size/2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 绘制发光效果
+            ctx.strokeStyle = 'rgba(76, 217, 100, 0.6)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(reward.x + reward.size/2, reward.y + reward.size/2, reward.size/2 + 2, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // 绘制域名文字
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('✓', reward.x + reward.size/2, reward.y + reward.size/2 + 3);
+        }
+        
+        // 绘制地面
+        function drawGround() {
+            // 地面
+            ctx.fillStyle = ground.color;
+            ctx.fillRect(0, ground.y, canvas.width, ground.height);
+            
+            // 地面装饰线
+            ctx.strokeStyle = '#4a69bd';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, ground.y);
+            ctx.lineTo(canvas.width, ground.y);
+            ctx.stroke();
+            
+            // 地面图案
+            ctx.fillStyle = '#6a89cc';
+            for (let i = 0; i < canvas.width; i += 40) {
+                ctx.fillRect(i, ground.y + 5, 20, 5);
+            }
+        }
+        
+        // 绘制背景
+        function drawBackground() {
+            // 渐变背景
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#0a192f');
+            gradient.addColorStop(1, '#0c2461');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制背景元素（数据流效果）
+            for (let element of backgroundElements) {
+                ctx.fillStyle = element.color;
+                ctx.fillRect(element.x, element.y, element.size, element.size * 3);
+                
+                // 更新位置
+                element.x -= element.speed;
+                if (element.x < -10) {
+                    element.x = canvas.width + 10;
+                    element.y = Math.random() * canvas.height * 0.7;
+                }
+            }
+            
+            // 绘制游戏标题
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('ANCODA域名守卫者', canvas.width / 2, 40);
+            
+            // 绘制正确域名提示
+            ctx.fillStyle = 'rgba(76, 217, 100, 0.2)';
+            ctx.font = '16px Arial';
+            ctx.fillText('正确域名: www.ancoda.com.cn', canvas.width / 2, 70);
+        }
+        
+        // 更新玩家位置
+        function updatePlayer() {
+            // 跳跃物理
+            if (player.jumping) {
+                player.y += player.jumpVelocity;
+                player.jumpVelocity += player.gravity;
+                
+                // 落地检测
+                if (player.y >= canvas.height - 60 - ground.height) {
+                    player.y = canvas.height - 60 - ground.height;
+                    player.jumping = false;
+                    player.jumpVelocity = 0;
+                }
+            }
+            
+            // 蹲下处理
+            if (player.ducking) {
+                player.height = 40;
+            } else {
+                player.height = 60;
+                // 确保站立时脚在地上
+                if (!player.jumping) {
+                    player.y = canvas.height - player.height - ground.height;
+                }
+            }
+        }
+        
+        // 生成障碍物
+        function generateObstacle() {
+            const obstacleTypes = [
+                { text: 'ancoda.com', width: 110, height: 40 },
+                { text: 'ancoda.cn', width: 100, height: 40 }
+            ];
+            
+            const type = obstacleTypes[Math.floor(Math.random() * obstacleTypes.length)];
+            
+            obstacles.push({
+                x: canvas.width,
+                y: canvas.height - type.height - ground.height,
+                width: type.width,
+                height: type.height,
+                text: type.text,
+                color: '#ff6b6b'
+            });
+        }
+        
+        // 生成奖励
+        function generateReward() {
+            rewards.push({
+                x: canvas.width,
+                y: canvas.height - 100 - ground.height,
+                size: 30,
+                text: 'ancoda.com.cn'
+            });
+        }
+        
+        // 更新障碍物和奖励
+        function updateObstaclesAndRewards() {
+            // 更新障碍物
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                obstacles[i].x -= game.speed;
+                
+                // 移除屏幕外的障碍物
+                if (obstacles[i].x + obstacles[i].width < 0) {
+                    obstacles.splice(i, 1);
+                    // 障碍物离开屏幕，增加分数
+                    if (game.running && !game.gameOver) {
+                        game.score += 10;
+                        scoreElement.textContent = game.score;
+                    }
+                }
+            }
+            
+            // 更新奖励
+            for (let i = rewards.length - 1; i >= 0; i--) {
+                rewards[i].x -= game.speed;
+                
+                // 移除屏幕外的奖励
+                if (rewards[i].x + rewards[i].size < 0) {
+                    rewards.splice(i, 1);
+                }
+            }
+            
+            // 随机生成新障碍物
+            if (obstacles.length === 0 || 
+                obstacles[obstacles.length - 1].x < canvas.width - 300) {
+                if (Math.random() < 0.02) {
+                    generateObstacle();
+                }
+            }
+            
+            // 随机生成新奖励
+            if (rewards.length === 0 || 
+                rewards[rewards.length - 1].x < canvas.width - 400) {
+                if (Math.random() < 0.01) {
+                    generateReward();
+                }
+            }
+        }
+        
+        // 碰撞检测
+        function checkCollisions() {
+            // 玩家边界
+            const playerLeft = player.x;
+            const playerRight = player.x + player.width;
+            const playerTop = player.y;
+            const playerBottom = player.y + player.height;
+            
+            // 检查障碍物碰撞
+            for (let obstacle of obstacles) {
+                const obstacleLeft = obstacle.x;
+                const obstacleRight = obstacle.x + obstacle.width;
+                const obstacleTop = obstacle.y;
+                const obstacleBottom = obstacle.y + obstacle.height;
+                
+                // 矩形碰撞检测
+                if (playerRight > obstacleLeft && 
+                    playerLeft < obstacleRight && 
+                    playerBottom > obstacleTop && 
+                    playerTop < obstacleBottom) {
+                    
+                    // 发生碰撞，减少生命
+                    game.lives--;
+                    livesElement.textContent = game.lives;
+                    
+                    // 移除障碍物
+                    const index = obstacles.indexOf(obstacle);
+                    obstacles.splice(index, 1);
+                    
+                    // 生命值为0时游戏结束
+                    if (game.lives <= 0) {
+                        gameOver();
+                    }
+                    
+                    // 碰撞后短暂无敌时间（通过闪烁表示）
+                    player.color = '#ff6b6b';
+                    setTimeout(() => {
+                        player.color = '#4a69bd';
+                    }, 300);
+                    
+                    break;
+                }
+            }
+            
+            // 检查奖励收集
+            for (let i = rewards.length - 1; i >= 0; i--) {
+                const reward = rewards[i];
+                const rewardCenterX = reward.x + reward.size/2;
+                const rewardCenterY = reward.y + reward.size/2;
+                
+                // 圆形与矩形碰撞检测（简化版）
+                const closestX = Math.max(playerLeft, Math.min(rewardCenterX, playerRight));
+                const closestY = Math.max(playerTop, Math.min(rewardCenterY, playerBottom));
+                
+                const distanceX = rewardCenterX - closestX;
+                const distanceY = rewardCenterY - closestY;
+                const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+                
+                if (distance < reward.size/2) {
+                    // 收集奖励
+                    game.score += 50;
+                    game.collectedDomains++;
+                    scoreElement.textContent = game.score;
+                    
+                    // 每收集5个正确域名增加生命
+                    if (game.collectedDomains % 5 === 0) {
+                        game.lives++;
+                        livesElement.textContent = game.lives;
+                    }
+                    
+                    // 移除奖励
+                    rewards.splice(i, 1);
+                    
+                    // 奖励收集效果
+                    player.color = '#4cd964';
+                    setTimeout(() => {
+                        player.color = '#4a69bd';
+                    }, 200);
+                }
+            }
+        }
+        
+        // 更新游戏速度
+        function updateGameSpeed() {
+            // 每1000分增加速度
+            const speedLevel = Math.floor(game.score / 1000);
+            game.speed = 5 + speedLevel * 0.5;
+            
+            // 速度上限
+            if (game.speed > 15) {
+                game.speed = 15;
+            }
+        }
+        
+        // 游戏主循环
+        function gameLoop() {
+            // 清除画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制背景
+            drawBackground();
+            
+            // 绘制地面
+            drawGround();
+            
+            // 更新和绘制玩家
+            updatePlayer();
+            drawPlayer();
+            
+            // 更新和绘制障碍物与奖励
+            updateObstaclesAndRewards();
+            
+            for (let obstacle of obstacles) {
+                drawObstacle(obstacle);
+            }
+            
+            for (let reward of rewards) {
+                drawReward(reward);
+            }
+            
+            // 碰撞检测
+            checkCollisions();
+            
+            // 更新游戏速度
+            updateGameSpeed();
+            
+            // 继续游戏循环
+            if (game.running && !game.paused && !game.gameOver) {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+        
+        // 开始游戏
+        function startGame() {
+            game.running = true;
+            game.paused = false;
+            game.gameOver = false;
+            game.score = 0;
+            game.lives = 3;
+            game.speed = 5;
+            game.collectedDomains = 0;
+            
+            // 重置暂停按钮状态
+            pauseButton.innerHTML = '<i class="fas fa-pause"></i> 暂停游戏';
+            pauseButton.title = '暂停游戏';
+            
+            // 重置玩家
+            player.y = canvas.height - 60 - ground.height;
+            player.jumping = false;
+            player.ducking = false;
+            player.jumpVelocity = 0;
+            player.color = '#4a69bd';
+            
+            // 清空障碍物和奖励
+            obstacles = [];
+            rewards = [];
+            
+            // 更新UI
+            scoreElement.textContent = game.score;
+            livesElement.textContent = game.lives;
+            startMessage.style.display = 'none';
+            gameOverMessage.style.display = 'none';
+            
+            // 开始游戏循环
+            gameLoop();
+        }
+        
+        // 暂停游戏
+        function pauseGame() {
+            game.paused = !game.paused;
+            
+            if (game.paused) {
+                pauseButton.innerHTML = '<i class="fas fa-play"></i> 继续游戏';
+                pauseButton.title = '继续游戏';
+            } else {
+                pauseButton.innerHTML = '<i class="fas fa-pause"></i> 暂停游戏';
+                pauseButton.title = '暂停游戏';
+                if (game.running && !game.gameOver) {
+                    gameLoop();
+                }
+            }
+        }
+        
+        // 游戏结束
+        function gameOver() {
+            game.running = false;
+            game.gameOver = true;
+            
+            // 更新最高分
+            if (game.score > game.highScore) {
+                game.highScore = game.score;
+                localStorage.setItem('ancodaHighScore', game.highScore);
+                highScoreElement.textContent = game.highScore;
+            }
+            
+            // 显示游戏结束消息
+            finalScoreElement.textContent = game.score;
+            gameOverMessage.style.display = 'block';
+        }
+        
+        // 重新开始游戏
+        function restartGame() {
+            gameOverMessage.style.display = 'none';
+            startGame();
+        }
+        
+        // 键盘控制
+        document.addEventListener('keydown', function(event) {
+            keys[event.code] = true;
+            
+            // 空格键或上箭头跳跃
+            if ((event.code === 'Space' || event.code === 'ArrowUp') && game.running && !game.gameOver) {
+                if (!player.jumping) {
+                    player.jumping = true;
+                    player.jumpVelocity = player.jumpPower;
+                }
+                event.preventDefault();
+            }
+            
+            // 下箭头蹲下
+            if (event.code === 'ArrowDown' && game.running && !game.gameOver) {
+                player.ducking = true;
+                event.preventDefault();
+            }
+            
+            // 回车键开始游戏
+            if (event.code === 'Enter' && !game.running) {
+                startGame();
+            }
+            
+            // P键暂停游戏
+            if (event.code === 'KeyP' && game.running && !game.gameOver) {
+                pauseGame();
+            }
+        });
+        
+        document.addEventListener('keyup', function(event) {
+            keys[event.code] = false;
+            
+            // 释放下箭头停止蹲下
+            if (event.code === 'ArrowDown') {
+                player.ducking = false;
+            }
+        });
+        
+        // 按钮事件监听
+        startButton.addEventListener('click', startGame);
+        startButton2.addEventListener('click', startGame);
+        pauseButton.addEventListener('click', pauseGame);
+        restartButton.addEventListener('click', restartGame);
+        restartButton2.addEventListener('click', restartGame);
+        
+        // 显示开始消息
+        startMessage.style.display = 'block';
+        
+        // 初始化背景元素和粒子
+        createBackgroundElements();
+        createParticles();
+        
+        // 绘制初始画面
+        drawBackground();
+        drawGround();
+        drawPlayer();
+        
+        // 初始绘制一个示例障碍物和奖励
+        ctx.fillStyle = '#ff6b6b';
+        ctx.fillRect(600, canvas.height - 60 - ground.height, 110, 40);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('ancoda.com', 655, canvas.height - 60 - ground.height + 25);
+        
+        ctx.fillStyle = '#4cd964';
+        ctx.beginPath();
+        ctx.arc(400, canvas.height - 100 - ground.height, 15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10px Arial';
+        ctx.fillText('✓', 400, canvas.height - 100 - ground.height + 3);
+    </script>
+    
+    <!-- Font Awesome 图标 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
