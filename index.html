@@ -6,7 +6,7 @@
   <title>Ancoda 安可达</title>
   <link rel="icon" href="/favicon.ico">
 
-  <!-- 百度统计（可选，不需要可整段删除） -->
+  <!-- 百度统计 -->
   <script>
     var _hmt = _hmt || [];
     (function() {
@@ -50,20 +50,24 @@
       to   { opacity: 1; transform: none; }
     }
 
+    /* ===== Logo 区域 ===== */
     .logo {
-      width: 64px;
-      height: 64px;
+      width: 72px;
+      height: 72px;
       margin: 0 auto 18px;
-      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 30px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: .5px;
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      box-shadow: 0 12px 22px -10px rgba(37, 99, 235, .75);
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;   /* 完整显示，不裁切；如需铺满可改为 cover */
+      display: block;
+      border-radius: 16px;
+      /* 若图片自带阴影可去掉下面这行 */
+      filter: drop-shadow(0 8px 16px rgba(37, 99, 235, .22));
     }
 
     h1 {
@@ -142,7 +146,10 @@
 
 <body>
   <div class="card">
-    <div class="logo">A</div>
+    <!-- ===== Logo（本地图片） ===== -->
+    <div class="logo">
+      <img src="/images/logo.png" alt="Ancoda 安可达">
+    </div>
 
     <h1>Ancoda 安可达</h1>
     <p class="sub">点击下方按钮进入官网</p>
