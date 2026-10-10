@@ -1,41 +1,165 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="icon" href="/favicon.ico">
-    <script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?e9ca8e65b7bbe9f792ccb5e1e14400ab";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-    </script>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ancoda 安可达</title>
+  <link rel="icon" href="/favicon.ico">
 
-    <script>
-      function browserRedirect() {
-        var sUserAgent = navigator.userAgent.toLowerCase();
-        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-        var bIsAndroid = sUserAgent.match(/android/i) == "android";
-        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-        if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) ){
-            window.location.href="//www.ancoda.com.cn";
-        } else {
-            window.location.href="//www.ancoda.com.cn";
-        }
-      }  
-      browserRedirect();
-    </script>
-  </head> 
+  <!-- 百度统计（可选，不需要可整段删除） -->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e9ca8e65b7bbe9f792ccb5e1e14400ab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
-  
-<body> 
-	<h1>Ancoda安可达跳转页面，合作邮箱：ancoda@qq.com</h1>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: #1e293b;
+      background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 50%, #e0f2fe 100%);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px 28px 32px;
+      text-align: center;
+      box-shadow: 0 20px 45px -20px rgba(15, 23, 42, .28),
+                  0 0 0 1px rgba(15, 23, 42, .04);
+      animation: rise .5s ease both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 18px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .5px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      box-shadow: 0 12px 22px -10px rgba(37, 99, 235, .75);
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    .sub {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #64748b;
+    }
+
+    .btn {
+      display: block;
+      margin-top: 26px;
+      padding: 15px 20px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      box-shadow: 0 12px 22px -10px rgba(37, 99, 235, .8);
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    }
+    .btn:hover  { transform: translateY(-2px); box-shadow: 0 18px 28px -12px rgba(37, 99, 235, .85); }
+    .btn:active { transform: translateY(0) scale(.98); filter: brightness(.95); }
+
+    .divider {
+      margin: 26px 0 18px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+    }
+
+    .contact {
+      font-size: 13.5px;
+      color: #94a3b8;
+      line-height: 1.9;
+    }
+    .contact a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px dashed rgba(37, 99, 235, .45);
+    }
+    .contact a:hover { border-bottom-style: solid; }
+
+    .contact .label {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    .wechat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #334155;
+      font-weight: 600;
+      background: #f1f5f9;
+      border-radius: 20px;
+      padding: 2px 12px;
+      font-size: 13px;
+      margin-left: 4px;
+    }
+
+    .tip {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="logo">A</div>
+
+    <h1>Ancoda 安可达</h1>
+    <p class="sub">点击下方按钮进入官网</p>
+
+    <!-- 关键：点击后才跳转 -->
+    <a class="btn" href="https://www.ancoda.com.cn" rel="noopener">进入官网 →</a>
+
+    <div class="divider"></div>
+
+    <p class="contact">
+      <span class="label">邮箱：</span>
+      <a href="mailto:service@ancoda.com.cn">service@ancoda.com.cn</a>
+      <br>
+      <span class="label">微信：</span>
+      <span class="wechat">myancoda</span>
+    </p>
+    <p class="tip">点击按钮后将跳转至 www.ancoda.com.cn</p>
+  </div>
 </body>
-
 </html>
